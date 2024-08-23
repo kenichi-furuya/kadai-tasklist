@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \URL::forceScheme('https'); //リンクをHTTPSにする設定を行う
+        \URL::forceScheme('https'); // リンクをHTTPSにする設定に修正
     }
 }

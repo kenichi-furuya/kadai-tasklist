@@ -1,0 +1,41 @@
+# fly.toml app configuration file generated for tasklist-old-cloud-9939 on 2024-08-20T15:28:43Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'tasklist-old-cloud-9939'
+primary_region = 'nrt'
+console_command = 'php /var/www/html/artisan tinker'
+
+[build]
+  [build.args]
+    NODE_VERSION = '18'
+    PHP_VERSION = '8.2'
+
+[env]
+  APP_DEBUG = 'true'
+  APP_ENV = 'production'
+  APP_NAME = 'Laravel'
+  APP_URL = 'https://tasklist-old-cloud-9939.fly.dev'
+  DB_CONNECTION = 'pgsql'
+  DB_DATABASE = 'postgres'
+  DB_HOST = 'aws-0-ap-northeast-1.pooler.supabase.com'
+  DB_PORT = '6543'
+  DB_USERNAME = 'postgres.yssttilksvcagenzkbmf'
+  LOG_CHANNEL = 'errorlog'
+  LOG_LEVEL = 'debug'
+  LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
+  SESSION_DRIVER = 'cookie'
+  SESSION_SECURE_COOKIE = 'true'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
+  memory = '256mb'
