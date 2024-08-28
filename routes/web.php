@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+//use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
 
@@ -15,21 +15,15 @@ use App\Http\Controllers\TasksController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [TasksController::class, 'index']);
+Route::get('/dashboard', [TasksController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard'); //
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    //Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    //Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('tasks', TasksController::class, ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]); //'index', 
 });
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [TasksController::class, 'index']);
-Route::resource('tasks', TasksController::class);
